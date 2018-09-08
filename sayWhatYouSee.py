@@ -1,22 +1,3 @@
-######################################
-#        Powered by yakuza8          #
-######################################
-#
-# Say What You See series where ith element of series is composed of the immediate previous element's length
-# of the continuous substring of different character followed by that character
-#
-# The first 10 elements of the series:
-# 1
-# 11
-# 21
-# 1211
-# 111221
-# 312211
-# 13112221
-# 1113213211
-# 31131211131221
-# 13211311123113112211
-
 ####### Functions for recursive algorithm #######
 
 def merger(l):
@@ -90,11 +71,15 @@ def getLongestSubs(n):
 
 #################################################
 
+################ Common Functions ###############
+
 def assembly(l):
     result = []
     for i in l:
         result.append(str(i[0]) + str(i[1]))
     return "".join(result)
+
+#################################################
 
 def sayWhatYouSee(n):
     '''

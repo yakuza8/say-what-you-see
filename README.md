@@ -1,6 +1,6 @@
-# Say What You See Sequence Python Script
+# Say What You See Sequence
 
-Say What You See series where ith element of series is composed of groups in the form as the count of the longest same digit group followed by that digit in (i-1)th element of the sequence.
+Say What You See series where each element of series is composed of groups in the form as the count of the longest same digit group followed by that digit in its previous element of the sequence.
 
 The first 10 elements of the series:
 * 1
