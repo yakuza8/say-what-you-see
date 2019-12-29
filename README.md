@@ -18,7 +18,7 @@ The first 10 elements of the series:
    No prerequisites is needed, but just python3.5 interpreter.
 
 ## Usage
-   Simply run sayWhatYouSee.py as the following
+   Simply run say-what-you-see.py as the following
    
    ```commandline
    python3 say-what-you-see.py
