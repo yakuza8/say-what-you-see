@@ -13,7 +13,7 @@ def merger(l):
         return l
     else:
         # Divide the list from half
-        half_length = len(l) / 2
+        half_length = int(len(l) / 2)
         left = merger(l[:half_length])
         right = merger(l[half_length:])
         if left[-1][-1] == right[0][0]:
@@ -27,8 +27,8 @@ def merger(l):
 def separator(s):
     """
     From any string, return the list composed of each character that are in the string
-    :param s:
-    :return:
+    :param s: String to be separated character by character like '121211'
+    :return: Separated list of characters where one can look like ['1', '2', '1', '2', '1', '1']
     """
     result = []
     for i in s:
@@ -36,16 +36,18 @@ def separator(s):
     return result
 
 
-def formatter(l):
+def formatter(list_of_strings_of_unique_characters):
     """
     Takes the list in the form ['aaa', 'b', 'ccccc', ...] and return list of tuples which represents
     (length of list element, its composer character)
     In other words, return [(3, 'a'), (1, 'b'), (5, 'c'), ...]
-    :param l:
-    :return:
+    :param list_of_strings_of_unique_characters: List of strings
+    where each string expected as combination of one character
+    :return: Tuple for each string in the given list where tuple represents the count of the characters
+    in each string and the first character of that string
     """
     result = []
-    for i in l:
+    for i in list_of_strings_of_unique_characters:
         result.append((len(i), i[0]))
     return result
 
@@ -58,20 +60,20 @@ def get_longest_substring(n):
     """
     Iterates over the string and parses it in order to create list of tuples from length of
     the longest contiguous characters and that character
-    :param n:
-    :return:
+    :param n: String to be parsed and processed in order to find out longest substring and count tuples
+    :return: List of (count, character) tuples
     """
-    temp = n
     result = []
-    _len = len(temp)
-    while temp != "":
-        current_element = temp[0]
-        times = 1
-        while _len > times and current_element == temp[times]:
-            times += 1
-        _len -= times
-        temp = temp[times:]
-        result.append((times, int(current_element)))
+    current_char = n[0]
+    current_char_count = 0
+    for ch in n:
+        if ch == current_char:
+            current_char_count += 1
+        elif current_char is not None:
+            result.append((current_char_count, int(current_char)))
+            current_char = ch
+            current_char_count = 1
+    result.append((current_char_count, int(current_char)))
     return result
 
 
@@ -80,6 +82,11 @@ def get_longest_substring(n):
 # ############### Common Functions ############## #
 
 def assembly(l):
+    """
+    List of tuples assembler where each tuple represents the count of a character and that character in it
+    :param l:  List of tuples where any instance can look like [(1, 2), (1, 1)]
+    :return: Merged string of the list of tuples where the above instance can be returned as '1211'
+    """
     result = []
     for i in l:
         result.append(str(i[0]) + str(i[1]))
@@ -91,27 +98,25 @@ def assembly(l):
 def say_what_you_see(n):
     """
     :param n: The number of elements that you need to have in the output list
-    :return:
+    :return: Generator for each element in the expected series
     """
+    # Initial series element
     series = [1]
+    yield str(series[0])
     for i in range(1, n):
         # Iterative string processor
-        series.append(assembly(get_longest_substring(str(series[i - 1]))))
+        element = assembly(get_longest_substring(str(series[i - 1])))
 
         # Recursive divide and conquer algorithm
-        # series.append(assembly(formatter(merger(separator(str(series[i-1]))))))
+        # element = assembly(formatter(merger(separator(str(series[i-1])))))
 
-    return series
+        series.append(element)
+        yield element
 
 
 def main():
-    while True:
-        a = int(input("Enter the number of elements : "))
-        if a <= 0:
-            print("Invalid length of sequence")
-            break
-        for i in say_what_you_see(a):
-            print(i)
+    for i in say_what_you_see(10):
+        print(i)
 
 
 if __name__ == "__main__":
