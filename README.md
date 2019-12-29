@@ -21,5 +21,5 @@ The first 10 elements of the series:
    Simply run sayWhatYouSee.py as the following
    
    ```commandline
-   python3 sayWhatYouSee.py
+   python3 say-what-you-see.py
 ```
