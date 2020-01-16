@@ -97,12 +97,25 @@ def assembly(l):
 
 def say_what_you_see(n):
     """
+    >>> list(say_what_you_see(1))
+    [1]
+    >>> list(say_what_you_see(2))
+    [1, 11]
+    >>> list(say_what_you_see(3))
+    [1, 11, 21]
+    >>> list(say_what_you_see(4))
+    [1, 11, 21, 1211]
+    >>> list(say_what_you_see(5))
+    [1, 11, 21, 1211, 111221]
+    >>> list(say_what_you_see(6))
+    [1, 11, 21, 1211, 111221, 312211]
+
     :param n: The number of elements that you need to have in the output list
     :return: Generator for each element in the expected series
     """
     # Initial series element
     series = [1]
-    yield str(series[0])
+    yield int(series[0])
     for i in range(1, n):
         # Iterative string processor
         element = assembly(get_longest_substring(str(series[i - 1])))
@@ -111,7 +124,7 @@ def say_what_you_see(n):
         # element = assembly(formatter(merger(separator(str(series[i-1])))))
 
         series.append(element)
-        yield element
+        yield int(element)
 
 
 def main():
@@ -120,4 +133,6 @@ def main():
 
 
 if __name__ == "__main__":
+    import doctest
+    doctest.testmod()
     main()
