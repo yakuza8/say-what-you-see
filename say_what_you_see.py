@@ -97,6 +97,14 @@ def assembly(l):
 
 def say_what_you_see(n):
     """
+    >>> list(say_what_you_see(0))
+    Traceback (most recent call last):
+    ...
+    ValueError: Number of elements must be greater than 1.
+    >>> list(say_what_you_see(-2))
+    Traceback (most recent call last):
+    ...
+    ValueError: Number of elements must be greater than 1.
     >>> list(say_what_you_see(1))
     [1]
     >>> list(say_what_you_see(2))
@@ -113,6 +121,10 @@ def say_what_you_see(n):
     :param n: The number of elements that you need to have in the output list
     :return: Generator for each element in the expected series
     """
+    # Condition to get series
+    if n < 1:
+        raise ValueError("Number of elements must be greater than 1.")
+
     # Initial series element
     series = [1]
     yield int(series[0])
